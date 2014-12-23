@@ -80,6 +80,30 @@ $app->post('/api/outgoings', function() use ($app) {
     echo json_encode($response);
 });
 
+$app->delete('/api/outgoings/{id}', function ($id) use ($app) {
+  $phql = "DELETE FROM outgoings WHERE id = :id:";
+  $status = $app->modelsManager->executeQuery($phql, array(
+    'id' => $id
+  ));
+    
+  if ($status->success() == true) {
+    $response = array('status' => 'OK');
+  } else {
+    //Change the HTTP status
+    //$this->response->setStatusCode(409, "Conflict")->sendHeaders();
+
+    //Envía el error a cliente
+    $errors = array();
+    foreach ($status->getMessages() as $message) {
+      $errors[] = $message->getMessage();
+    }
+    
+    $response = array('status' => 'ERROR', 'messages' => $errors);
+  }
+
+  echo json_encode($data);
+});
+
 $app->notFound(function () use ($app) {
     $app->response->setStatusCode(404, "Not Found")->sendHeaders();
     echo 'This is crazy, but this page was not found!';

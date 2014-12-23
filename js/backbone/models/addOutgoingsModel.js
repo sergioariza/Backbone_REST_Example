@@ -17,10 +17,10 @@ $("#outgoingsForm").submit(function( event ) {
       processData: true,
       success: function (data) {
         console.log(["Login request details: ", data]);
-        if(data.error) {  // If there is an error, show the error messages
+        if(data.error) {
            $('.alert-error').text(data.error.text).show();
         }
-        else { // If not, send them back to the home page
+        else {
           window.location.replace('http://localhost:8080/backbone_rest_example/index.html');
         }
       }

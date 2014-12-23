@@ -14,6 +14,7 @@ views.OutgoingsItem = Backbone.View.extend({
     jQuery(this.el).append(jQuery('<td>' + this.model.get('id') + '</td>'));
     jQuery(this.el).append(jQuery('<td>' + this.model.get('description') + '</td>'));
     jQuery(this.el).append(jQuery('<td>' + this.model.get('quantity') + '</td>'));
+    jQuery(this.el).append(jQuery('<td><a class="btn btn-danger" onclick="deleteOutgoings(' + this.model.get('id') + ')">Borrar gasto</a></td>'));
     return this;
   }
 });
